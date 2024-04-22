@@ -3,6 +3,6 @@ module com.calculator.javafx_calculator {
     requires javafx.fxml;
 
 
-    opens com.calculator.javafx_calculator to javafx.fxml;
-    exports com.calculator.javafx_calculator;
+    opens com.calculator.javafxcontrol to javafx.fxml;
+    exports com.calculator.javafxcontrol;
 }
