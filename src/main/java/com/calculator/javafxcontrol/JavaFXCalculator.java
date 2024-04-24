@@ -25,10 +25,14 @@ public class JavaFXCalculator extends Application {
             "MR", "MC", "MC+", "M-"
     };
     // For computation
-    private int inputInt = 0;      // Result of computation
+    private int result = 0;      // Result of computation
     private String inputString = "0";  // Input number as String
     // Previous operator: ' '(nothing), '+', '-', '*', '/', '='
     private char lastOperator = ' ';
+
+    private String memoryText;
+
+    private double memoryValue;
 
     // Event handler for all the 24 Buttons
     EventHandler handler = evt -> {
@@ -45,7 +49,7 @@ public class JavaFXCalculator extends Application {
                 userInput.setText(inputString);
                 // Clear buffer if last operator is '='
                 if (lastOperator == '=') {
-                    inputInt = 0;
+                    result = 0;
                     lastOperator = ' ';
                 }
                 break;
@@ -74,7 +78,7 @@ public class JavaFXCalculator extends Application {
 
             // Clear button
             case "C":
-                inputInt = 0;
+                result = 0;
                 inputString = "0";
                 lastOperator = ' ';
                 userInput.setText("0");
@@ -89,19 +93,19 @@ public class JavaFXCalculator extends Application {
         int inNum = Integer.parseInt(inputString);
         inputString = "0";
         if (lastOperator == ' ') {
-            inputInt = inNum;
+            result = inNum;
         } else if (lastOperator == '+') {
-            inputInt += inNum;
+            result += inNum;
         } else if (lastOperator == '-') {
-            inputInt -= inNum;
+            result -= inNum;
         } else if (lastOperator == '*') {
-            inputInt *= inNum;
+            result *= inNum;
         } else if (lastOperator == '/') {
-            inputInt /= inNum;
+            result /= inNum;
         } else if (lastOperator == '=') {
             // Keep the result for the next operation
         }
-        userInput.setText(inputInt + "");
+        userInput.setText(result + "");
     }
 
     // Setup the UI
