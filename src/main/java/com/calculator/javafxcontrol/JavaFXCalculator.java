@@ -15,13 +15,14 @@ import javafx.geometry.Pos;
 
 public class JavaFXCalculator extends Application {
     private TextField userInput;    // display textfield
-    private Button[] btns;          // 20 buttons
-    private String[] btnLabels = {  // Labels of 20 buttons
+    private Button[] btns;          // 24 buttons
+    private String[] btnLabels = {  // Labels of 24 buttons
             "7", "8", "9", "+",
             "4", "5", "6", "-",
             "1", "2", "3", "x",
-            "C", "0", "=", "/",
-            ""
+            ".", "0", "=", "/",
+            "C", "←", "^", "√",
+            "MR", "MC", "MC+", "M-"
     };
     // For computation
     private int inputInt = 0;      // Result of computation
@@ -29,7 +30,7 @@ public class JavaFXCalculator extends Application {
     // Previous operator: ' '(nothing), '+', '-', '*', '/', '='
     private char lastOperator = ' ';
 
-    // Event handler for all the 20 Buttons
+    // Event handler for all the 24 Buttons
     EventHandler handler = evt -> {
         String currentBtnLabel = ((Button)evt.getSource()).getText();
         switch (currentBtnLabel) {
@@ -113,7 +114,7 @@ public class JavaFXCalculator extends Application {
 
         // Setup a GridPane for 4x4 Buttons
         int numCols = 4;
-        int numRows = 4;
+        int numRows = 6;
         GridPane paneButton = new GridPane();
         paneButton.setPadding(new Insets(15, 0, 15, 0));  // top, right, bottom, left
         paneButton.setVgap(5);  // Vertical gap between nodes
@@ -127,8 +128,8 @@ public class JavaFXCalculator extends Application {
             paneButton.getColumnConstraints().add(columns[i]);
         }
 
-        // Setup 16 Buttons and add to GridPane; and event handler
-        btns = new Button[16];
+        // Setup 24 Buttons and add to GridPane; and event handler
+        btns = new Button[24];
         for (int i = 0; i < btns.length; ++i) {
             btns[i] = new Button(btnLabels[i]);
             btns[i].setOnAction(handler);  // Register event handler
