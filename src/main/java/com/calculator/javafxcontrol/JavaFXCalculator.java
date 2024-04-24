@@ -25,7 +25,7 @@ public class JavaFXCalculator extends Application {
             "MR", "MC", "MC+", "M-"
     };
     // For computation
-    private int result = 0;      // Result of computation
+    private double result = 0;      // Result of computation
     private String inputString = "0";  // Input number as String
     // Previous operator: ' '(nothing), '+', '-', '*', '/', '='
     private char lastOperator = ' ';
@@ -41,6 +41,7 @@ public class JavaFXCalculator extends Application {
             // Number buttons
             case "0": case "1": case "2": case "3": case "4":
             case "5": case "6": case "7": case "8": case "9":
+            case ".":
                 if (inputString.equals("0")) {
                     inputString = currentBtnLabel;  // no leading zero
                 } else {
@@ -75,6 +76,13 @@ public class JavaFXCalculator extends Application {
                 compute();
                 lastOperator = '=';
                 break;
+
+            case "M+":
+                if (this.lastOperator != '=') {
+                    double memory = Double.parseDouble(inputString);
+                }
+
+
 
             // Clear button
             case "C":
