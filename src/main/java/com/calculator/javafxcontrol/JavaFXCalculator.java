@@ -9,12 +9,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.Priority;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 public class JavaFXCalculator extends Application {
     private TextField userInput;    // display textfield
+
+    //private Text memoryOutput = ;
     private Button[] btns;          // 24 buttons
     private String[] btnLabels = {  // Labels of 24 buttons
             "7", "8", "9", "+",
@@ -79,7 +82,11 @@ public class JavaFXCalculator extends Application {
 
             case "M+":
                 if (this.lastOperator != '=') {
-                    double memory = Double.parseDouble(inputString);
+                    memoryValue = Double.parseDouble(inputString);
+                }
+                else {
+                    memoryValue =+ result;
+
                 }
 
 
@@ -153,6 +160,7 @@ public class JavaFXCalculator extends Application {
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(15, 15, 15, 15));  // top, right, bottom, left
         root.setTop(userInput);     // Top zone contains the TextField
+        //root.setBottom(memoryOutput);
         root.setCenter(paneButton); // Center zone contains the GridPane of Buttons
 
         // Set up scene and stage
