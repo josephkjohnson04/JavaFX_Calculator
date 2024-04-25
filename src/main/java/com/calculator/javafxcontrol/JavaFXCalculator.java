@@ -16,8 +16,6 @@ import javafx.geometry.Pos;
 
 public class JavaFXCalculator extends Application {
     private TextField userInput;    // display textfield
-
-    //private Text memoryOutput = ;
     private Button[] btns;          // 24 buttons
     private String[] btnLabels = {  // Labels of 24 buttons
             "7", "8", "9", "+",
@@ -25,17 +23,17 @@ public class JavaFXCalculator extends Application {
             "1", "2", "3", "x",
             ".", "0", "=", "/",
             "C", "←", "^", "√",
-            "MR", "MC", "MC+", "M-"
+            "MR", "MC", "M+", "M-"
     };
     // For computation
     private double result = 0;      // Result of computation
-    private String inputString = "0";  // Input number as String
+    private String inStr = "0";  // Input number as String
     // Previous operator: ' '(nothing), '+', '-', '*', '/', '='
     private char lastOperator = ' ';
 
-    private String memoryText;
+    private Text memoryText;
 
-    private double memoryValue;
+    private double memory;
 
     // Event handler for all the 24 Buttons
     EventHandler handler = evt -> {
@@ -45,12 +43,12 @@ public class JavaFXCalculator extends Application {
             case "0": case "1": case "2": case "3": case "4":
             case "5": case "6": case "7": case "8": case "9":
             case ".":
-                if (inputString.equals("0")) {
-                    inputString = currentBtnLabel;  // no leading zero
+                if (inStr.equals("0")) {
+                    inStr = currentBtnLabel;  // no leading zero
                 } else {
-                    inputString += currentBtnLabel; // append input digit
+                    inStr += currentBtnLabel; // append input digit
                 }
-                userInput.setText(inputString);
+                userInput.setText(inStr);
                 // Clear buffer if last operator is '='
                 if (lastOperator == '=') {
                     result = 0;
@@ -79,22 +77,17 @@ public class JavaFXCalculator extends Application {
                 compute();
                 lastOperator = '=';
                 break;
-
-            case "M+":
-                if (this.lastOperator != '=') {
-                    memoryValue = Double.parseDouble(inputString);
-                }
-                else {
-                    memoryValue =+ result;
-
-                }
-
-
+            case "MR":
+                memoryRecall();
+                break;
+            case "MC":
+                memoryClear();
+                break;
 
             // Clear button
             case "C":
                 result = 0;
-                inputString = "0";
+                inStr = "0";
                 lastOperator = ' ';
                 userInput.setText("0");
                 break;
@@ -105,8 +98,8 @@ public class JavaFXCalculator extends Application {
     // Perform computation on the previous result and the current input number,
     // based on the previous operator.
     private void compute() {
-        int inNum = Integer.parseInt(inputString);
-        inputString = "0";
+        int inNum = Integer.parseInt(inStr);
+        inStr = "0";
         if (lastOperator == ' ') {
             result = inNum;
         } else if (lastOperator == '+') {
@@ -121,6 +114,16 @@ public class JavaFXCalculator extends Application {
             // Keep the result for the next operation
         }
         userInput.setText(result + "");
+    }
+
+    private void memoryRecall() {
+        this.inStr = String.valueOf(this.memory);
+        this.userInput.setText(this.memory + "");
+    }
+
+    private void memoryClear() {
+        this.memory = 0.0;
+        memoryText.setText("Memory = " + this.memory);
     }
 
     // Setup the UI
