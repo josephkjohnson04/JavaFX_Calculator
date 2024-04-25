@@ -83,6 +83,13 @@ public class JavaFXCalculator extends Application {
             case "MC":
                 memoryClear();
                 break;
+            case "M+":
+                memoryAdd();
+                break;
+            case "M-":
+                memorySubtract();
+                break;
+
 
             // Clear button
             case "C":
@@ -124,6 +131,26 @@ public class JavaFXCalculator extends Application {
     private void memoryClear() {
         this.memory = 0.0;
         memoryText.setText("Memory = " + this.memory);
+    }
+
+    private void memoryAdd(){
+        if (lastOperator != '=') {
+            double inValue = Double.parseDouble(inStr);
+            memory += inValue;
+        } else{
+            memory+= result;
+        }
+        memoryText.setText("Memory = " + memory);
+    }
+
+    private void memorySubtract(){
+        if (lastOperator != '='){
+            double inValue = Double.parseDouble(inStr);
+            this.memory -= this.result;
+        }else {
+            this.memory -= this.result;
+        }
+        this.memoryText.setText("Memory = " + this.memory);
     }
 
     // Setup the UI
