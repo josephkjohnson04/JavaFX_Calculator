@@ -169,22 +169,24 @@ public class JavaFXCalculator extends Application {
         paneButton.setVgap(5);  // Vertical gap between nodes
         paneButton.setHgap(5);  // Horizontal gap between nodes
         // Setup 4 columns of equal width, fill parent
-        ColumnConstraints[] columns = new ColumnConstraints[numCols];
+        ColumnConstraints[] btns = new ColumnConstraints[numCols];
         for (int i = 0; i < numCols; ++i) {
-            columns[i] = new ColumnConstraints();
-            columns[i].setHgrow(Priority.ALWAYS) ;  // Allow column to grow
-            columns[i].setFillWidth(true);  // Ask nodes to fill space for column
-            paneButton.getColumnConstraints().add(columns[i]);
+            btns[i] = new ColumnConstraints();
+            btns[i].setHgrow(Priority.ALWAYS) ;  // Allow column to grow
+            btns[i].setFillWidth(true);  // Ask nodes to fill space for column
+            paneButton.getColumnConstraints().add(btns[i]);
         }
 
         // Setup 24 Buttons and add to GridPane; and event handler
-        btns = new Button[24];
-        for (int i = 0; i < btns.length; ++i) {
-            btns[i] = new Button(btnLabels[i]);
-            btns[i].setOnAction(handler);  // Register event handler
-            btns[i].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);  // full-width
-            paneButton.add(btns[i], i % numCols, i / numCols);  // control, col, row
+        this.btns = new Button[24];
+        for (int i = 0; i < this.btns.length; ++i) {
+            this.btns[i] = new Button(btnLabels[i]);
+            this.btns[i].setOnAction(handler);  // Register event handler
+            this.btns[i].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);  // full-width
+            paneButton.add(this.btns[i], i % numCols, i / numCols);  // control, col, row
         }
+
+        memoryText = new Text("Memory = 0.0");
 
         // Setup up the scene graph rooted at a BorderPane (of 5 zones)
         BorderPane root = new BorderPane();
@@ -192,6 +194,7 @@ public class JavaFXCalculator extends Application {
         root.setTop(userInput);     // Top zone contains the TextField
         //root.setBottom(memoryOutput);
         root.setCenter(paneButton); // Center zone contains the GridPane of Buttons
+        root.setBottom(memoryText);
 
         // Set up scene and stage
         primaryStage.setScene(new Scene(root, 300, 300));
