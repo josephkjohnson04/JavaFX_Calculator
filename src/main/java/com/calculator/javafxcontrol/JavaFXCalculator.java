@@ -42,20 +42,19 @@ public class JavaFXCalculator extends Application {
             // Number buttons
             case "0": case "1": case "2": case "3": case "4":
             case "5": case "6": case "7": case "8": case "9":
-            case ".":
                 if (inStr.equals("0")) {
                     inStr = currentBtnLabel;  // no leading zero
                 } else {
                     inStr += currentBtnLabel; // append input digit
                 }
                 userInput.setText(inStr);
+
                 // Clear buffer if last operator is '='
                 if (lastOperator == '=') {
                     result = 0;
                     lastOperator = ' ';
                 }
-                break;
-
+            break;
             // Operator buttons: '+', '-', 'x', '/' and '='
             case "+":
                 compute();
@@ -76,6 +75,9 @@ public class JavaFXCalculator extends Application {
             case "=":
                 compute();
                 lastOperator = '=';
+                break;
+            case ".":
+                decimal();
                 break;
             case "MR":
                 memoryRecall();
@@ -114,7 +116,7 @@ public class JavaFXCalculator extends Application {
     // Perform computation on the previous result and the current input number,
     // based on the previous operator.
     private void compute() {
-        int inNum = Integer.parseInt(inStr);
+        double inNum = Double.parseDouble(inStr);
         inStr = "0";
         if (lastOperator == ' ') {
             result = inNum;
@@ -132,6 +134,13 @@ public class JavaFXCalculator extends Application {
             result = Math.pow(result, inNum);
         }
         userInput.setText(result + "");
+    }
+
+    private void decimal() {
+        if (!inStr.contains(".")) {
+            inStr += ".";
+        }
+        userInput.setText(inStr);
     }
 
     private void memoryRecall() {
