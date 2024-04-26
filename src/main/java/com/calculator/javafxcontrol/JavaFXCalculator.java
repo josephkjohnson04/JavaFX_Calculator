@@ -89,6 +89,11 @@ public class JavaFXCalculator extends Application {
             case "M-":
                 memorySubtract();
                 break;
+            case "^":
+                compute();
+                lastOperator = '^';
+                break;
+
 
 
             // Clear button
@@ -119,6 +124,9 @@ public class JavaFXCalculator extends Application {
             result /= inNum;
         } else if (lastOperator == '=') {
             // Keep the result for the next operation
+        }
+        else if (lastOperator == '^'){
+            result = Math.pow(result, inNum);
         }
         userInput.setText(result + "");
     }
