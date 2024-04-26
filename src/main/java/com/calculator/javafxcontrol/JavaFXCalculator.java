@@ -94,12 +94,15 @@ public class JavaFXCalculator extends Application {
                 lastOperator = '^';
                 break;
             case "√":
-                result = Math.sqrt(result);
+                squareRoot();
+                break;
+            case "←":
+                backspace();
                 break;
 
             // Clear button
             case "C":
-                result = 0;
+                result = 0.0;
                 inStr = "0";
                 lastOperator = ' ';
                 userInput.setText("0");
@@ -125,8 +128,7 @@ public class JavaFXCalculator extends Application {
             result /= inNum;
         } else if (lastOperator == '=') {
             // Keep the result for the next operation
-        }
-        else if (lastOperator == '^'){
+        } else if (lastOperator == '^') {
             result = Math.pow(result, inNum);
         }
         userInput.setText(result + "");
@@ -160,6 +162,22 @@ public class JavaFXCalculator extends Application {
             this.memory -= this.result;
         }
         this.memoryText.setText("Memory = " + this.memory);
+    }
+
+    private void squareRoot() {
+        if (lastOperator != '=') {
+            result = Math.sqrt(Double.parseDouble(inStr));
+            this.result = result;
+            inStr = result + "";
+            userInput.setText(inStr);
+            lastOperator = '=';
+        }
+    }
+
+    private void backspace () {
+        if (inStr.length() == 1 ) {
+            inStr = "0";
+        }
     }
 
     // Setup the UI
