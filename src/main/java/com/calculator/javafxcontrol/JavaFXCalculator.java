@@ -223,7 +223,6 @@ public class JavaFXCalculator extends Application {
     private void squareRoot() {
         if (lastOperator != '=') {
             result = Math.sqrt(Double.parseDouble(inStr));
-            this.result = result;
             inStr = result + "";
             userInput.setText(inStr);
             lastOperator = '=';
