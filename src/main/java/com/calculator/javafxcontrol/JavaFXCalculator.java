@@ -15,8 +15,20 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
 public class JavaFXCalculator extends Application {
+
+    /**
+     * Keeps track of the user's input
+     */
     private TextField userInput;    // display textfield
+
+    /**
+     * All calculator buttons
+     */
     private Button[] btns;          // 24 buttons
+
+    /**
+     * Labels for every button in the calculator
+     */
     private String[] btnLabels = {  // Labels of 24 buttons
             "7", "8", "9", "+",
             "4", "5", "6", "-",
@@ -25,17 +37,35 @@ public class JavaFXCalculator extends Application {
             "C", "←", "^", "√",
             "MR", "MC", "M+", "M-"
     };
-    // For computation
-    private double result = 0;      // Result of computation
-    private String inStr = "0";  // Input number as String
-    // Previous operator: ' '(nothing), '+', '-', '*', '/', '='
+
+    /**
+     * Result of computation
+     */
+    private double result = 0;
+
+    /**
+     * Input number as String
+     */
+    private String inStr = "0";
+
+    /**
+     * The user's last inputted operator
+     */
     private char lastOperator = ' ';
 
+    /**
+     * Test for keeping track of memory and it's values
+     */
     private Text memoryText;
 
+    /**
+     * Value of the current item in memory
+     */
     private double memory;
 
-    // Event handler for all the 24 Buttons
+    /**
+     *  Event handler for all 24 buttons
+     */
     EventHandler handler = evt -> {
         String currentBtnLabel = ((Button)evt.getSource()).getText();
         switch (currentBtnLabel) {
@@ -54,7 +84,7 @@ public class JavaFXCalculator extends Application {
                     result = 0;
                     lastOperator = ' ';
                 }
-            break;
+                break;
             // Operator buttons: '+', '-', 'x', '/' and '='
             case "+":
                 compute();
@@ -76,34 +106,32 @@ public class JavaFXCalculator extends Application {
                 compute();
                 lastOperator = '=';
                 break;
-            case ".":
+            case ".": // Decimal button
                 decimal();
                 break;
-            case "MR":
+            case "MR": // Memory recall button
                 memoryRecall();
                 break;
-            case "MC":
+            case "MC": // Memory clear button
                 memoryClear();
                 break;
-            case "M+":
+            case "M+": // Memory add button
                 memoryAdd();
                 break;
-            case "M-":
+            case "M-": // Memory subtract button
                 memorySubtract();
                 break;
-            case "^":
+            case "^": // Power button
                 compute();
                 lastOperator = '^';
                 break;
-            case "√":
+            case "√": // Square root button
                 squareRoot();
                 break;
-            case "←":
+            case "←": // Backspace button
                 backspace();
                 break;
-
-            // Clear button
-            case "C":
+            case "C": // Clear button
                 result = 0.0;
                 inStr = "0";
                 lastOperator = ' ';
@@ -112,9 +140,10 @@ public class JavaFXCalculator extends Application {
         }
     };
 
-    // User pushes '+', '-', '*', '/' or '=' button.
-    // Perform computation on the previous result and the current input number,
-    // based on the previous operator.
+    /**
+     * User pushes '+', '-', '*', '/' '^' or '=' button. Performs computation on the previous result and the current
+     * input number, base on the previous operator.
+     */
     private void compute() {
         double inNum = Double.parseDouble(inStr);
         inStr = "0";
@@ -136,6 +165,9 @@ public class JavaFXCalculator extends Application {
         userInput.setText(result + "");
     }
 
+    /**
+     * Adds the decimal character to the calculator
+     */
     private void decimal() {
         if (!inStr.contains(".")) {
             inStr += ".";
@@ -143,36 +175,51 @@ public class JavaFXCalculator extends Application {
         userInput.setText(inStr);
     }
 
+    /**
+     * Allows for the memory to be recalled
+     */
     private void memoryRecall() {
         this.inStr = String.valueOf(this.memory);
         this.userInput.setText(this.memory + "");
     }
 
+    /**
+     * Clears the current value of the memory
+     */
     private void memoryClear() {
         this.memory = 0.0;
         memoryText.setText("Memory = " + this.memory);
     }
 
+    /**
+     * Allows for the user to add values to the memory
+     */
     private void memoryAdd(){
         if (lastOperator != '=') {
             double inValue = Double.parseDouble(inStr);
             memory += inValue;
-        } else{
+        } else {
             memory+= result;
         }
         memoryText.setText("Memory = " + memory);
     }
 
+    /**
+     * Allows for the user to subtract values to the memory
+     */
     private void memorySubtract(){
         if (lastOperator != '='){
             double inValue = Double.parseDouble(inStr);
-            this.memory -= this.result;
-        }else {
+            this.memory -= inValue;
+        } else {
             this.memory -= this.result;
         }
         this.memoryText.setText("Memory = " + this.memory);
     }
 
+    /**
+     * Logic for square root math problems
+     */
     private void squareRoot() {
         if (lastOperator != '=') {
             result = Math.sqrt(Double.parseDouble(inStr));
@@ -183,6 +230,9 @@ public class JavaFXCalculator extends Application {
         }
     }
 
+    /**
+     * Allows the user to backspace in the calculator to delete previous entries
+     */
     private void backspace () {
         if (inStr.length() == 1 ) {
             inStr = "0";
@@ -192,7 +242,10 @@ public class JavaFXCalculator extends Application {
         userInput.setText(inStr);
     }
 
-    // Setup the UI
+    /**
+     * Setup for the calculator's UI
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
         // Setup the Display TextField
@@ -200,7 +253,7 @@ public class JavaFXCalculator extends Application {
         userInput.setEditable(false);
         userInput.setAlignment(Pos.CENTER_RIGHT);
 
-        // Setup a GridPane for 4x4 Buttons
+        // Setup a GridPane for 4x6 Buttons
         int numCols = 4;
         int numRows = 6;
         GridPane paneButton = new GridPane();
@@ -225,15 +278,14 @@ public class JavaFXCalculator extends Application {
             paneButton.add(this.btns[i], i % numCols, i / numCols);  // control, col, row
         }
 
-        memoryText = new Text("Memory = 0.0");
+        memoryText = new Text("Memory = 0.0"); // Default memory output
 
         // Setup up the scene graph rooted at a BorderPane (of 5 zones)
         BorderPane root = new BorderPane();
         root.setPadding(new Insets(15, 15, 15, 15));  // top, right, bottom, left
         root.setTop(userInput);     // Top zone contains the TextField
-        //root.setBottom(memoryOutput);
         root.setCenter(paneButton); // Center zone contains the GridPane of Buttons
-        root.setBottom(memoryText);
+        root.setBottom(memoryText); // Sets the memory text output to the bottom of the calculator
 
         // Set up scene and stage
         primaryStage.setScene(new Scene(root, 300, 300));
@@ -241,6 +293,10 @@ public class JavaFXCalculator extends Application {
         primaryStage.show();
     }
 
+    /**
+     * Launches the calculator app
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
