@@ -275,6 +275,16 @@ public class JavaFXCalculator extends Application {
             this.btns[i] = new Button(btnLabels[i]);
             this.btns[i].setOnAction(handler);  // Register event handler
             this.btns[i].setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);  // full-width
+
+            if (btnLabels[i].equals("MR") || btnLabels[i].equals("MC") || btnLabels[i].equals("M+") || btnLabels[i].equals("M-")) {
+                this.btns[i].setStyle("-fx-background-color: #336699; -fx-text-fill: white;"); // Change to your desired color
+            } else if ( btnLabels[i].equals("+") || btnLabels[i].equals("-") || btnLabels[i].equals("x") || btnLabels[i].equals("/") ||
+                    btnLabels[i].equals("^") || btnLabels[i].equals("√")) {
+                this.btns[i].setStyle("-fx-background-color: #FFA500; -fx-text-fill: white;");
+            } else if(btnLabels[i].equals("←") || btnLabels[i].equals("=") || btnLabels[i].equals("C")){
+                this.btns[i].setStyle("-fx-background-color: #6a6a6a; -fx-text-fill: white;");
+            }
+
             paneButton.add(this.btns[i], i % numCols, i / numCols);  // control, col, row
         }
 
