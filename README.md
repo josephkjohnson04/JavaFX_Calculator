@@ -2,7 +2,8 @@
 
 ## Authors: Joe Johnson and Jaylen Kile
 
-## Summary: We edited a previous calculator in JavaFX that was able to add, subtract, multiply, and divide. We added memory recall, memory clear, memory add, and memory subtract for more options when using our calculator. Next, we added the ability to utilize decimals, square roots, and multiplying a number to a specific power. Finally, we added some design elements to make the calculator more visually appealing.
+## Summary: 
+We edited a previous calculator in JavaFX that was able to add, subtract, multiply, and divide. We added memory recall, memory clear, memory add, and memory subtract for more options when using our calculator. Next, we added the ability to utilize decimals, square roots, and multiplying a number to a specific power. Finally, we added some design elements to make the calculator more visually appealing.
 
 ## Usage:
 * Launch calculator
