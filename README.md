@@ -2,7 +2,7 @@
 
 ## Authors: Joe Johnson and Jaylen Kile
 
-We programmed a calculator. It has all of the basic features of any other calcualtor, including the memory buttons. It saves what is currently stored in the memory and it displays it at the bottom. 
+## Summary: We edited a previous calculator in JavaFX that was able to add, subtract, multiply, and divide. We added memory recall, memory clear, memory add, and memory subtract for more options when using our calculator. Next, we added the ability to utilize decimals, square roots, and multiplying a number to a specific power. Finally, we added some design elements to make the calculator more visually appealing.
 
 ## Usage:
 * Launch calculator
@@ -21,10 +21,10 @@ We programmed a calculator. It has all of the basic features of any other calcua
 * Memory display
 
 ## Skills Learned:
-* How to program a basic calculator
-* How to program the memory buttons on a calculator
-* How to program basic JavaFX elements.
-* How to display buttons on a GUI
-* How to display text on a GUI
-* How to change color of GUI buttons 
+* Programming a basic calculator
+* Math functions in Java
+* Parsing strings to doubles
+* JavaFX design elements
+* How to display buttons and text on a GUI in JavaFX
+* Using the Text element
 
