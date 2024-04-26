@@ -14,6 +14,16 @@ import javafx.stage.Stage;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
+/**
+ * The JavaFXCalculator is a calculator app that allows user's to solve math problems. They can add,
+ * subtract, multiply, divide, determine square root, and raise to the power of. The calculator
+ * includes a decimal button for more specific math and memory buttons.
+ *
+ * @author Jaylen Kile and Joe Johnson
+ * @version 1.0
+ * @link https://github.com/josephkjohnson04/JavaFX_Calculator.git
+ */
+
 public class JavaFXCalculator extends Application {
 
     /**
