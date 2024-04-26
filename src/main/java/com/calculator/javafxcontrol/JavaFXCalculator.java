@@ -177,7 +177,10 @@ public class JavaFXCalculator extends Application {
     private void backspace () {
         if (inStr.length() == 1 ) {
             inStr = "0";
+        } else {
+            inStr = inStr.substring(0, inStr.length() - 1);
         }
+        userInput.setText(inStr);
     }
 
     // Setup the UI
