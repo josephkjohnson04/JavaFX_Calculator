@@ -93,8 +93,9 @@ public class JavaFXCalculator extends Application {
                 compute();
                 lastOperator = '^';
                 break;
-
-
+            case "√":
+                result = Math.sqrt(result);
+                break;
 
             // Clear button
             case "C":
